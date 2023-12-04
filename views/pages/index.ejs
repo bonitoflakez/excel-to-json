@@ -1,19 +1,63 @@
+<!-- index.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificate</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto mt-8">
+      <% fetch_data.forEach(user => { %>
+      <div
+        class="bg-white rounded-lg shadow-lg mx-auto p-6 my-8 max-w-lg border-4 border-blue-500 relative"
+      >
+        <h2 class="text-3xl font-serif font-bold text-center mb-4">
+          Certificate of Recognition
+        </h2>
+        <p class="text-lg font-serif font-semibold text-center">
+          This is to certify that
+          <span class="text-blue-500"><%= user.name %></span>
+          has contributed
+          <span class="text-green-500"><%= user.amount %> INR</span>
+          which helped in planting
+          <span class="text-blue-500"><%= user.no_of_trees %> trees</span>.
+        </p>
+        <p class="text-sm text-gray-600 mt-4 text-center">
+          Awarded on <%= new Date().toLocaleDateString('en-US', { year:
+          'numeric', month: 'long', day: 'numeric' }) %>
+        </p>
+        <!-- Download button -->
+        <button
+          class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md transition ease-in-out delay-150 hover:scale-110"
+          onclick="downloadCertificate('<%= user.name %> Certificate')"
+        >
+          Download
+        </button>
+      </div>
+      <% }); %>
+    </div>
 
-<body>
-  <div class="container mx-auto border ">
-    <h2 class="text-2xl font-bold text-center">Certificate</h2>
-    <p class="text-sm font-bold text-center">This is to certify that user ___ has contributed ___ which helped in
-      planting ___ trees</p>
-  </div>
-</body>
+    <!-- JavaScript to handle PDF download -->
+    <script>
+      function downloadCertificate(fileName) {
+        const element = document.querySelector(".border-blue-500"); // Replace this with the appropriate selector for your certificate container
 
+        html2pdf(element, {
+          margin: 10,
+          filename: fileName,
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        });
+      }
+    </script>
+  </body>
 </html>

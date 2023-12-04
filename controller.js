@@ -1,5 +1,4 @@
 import xlsx from "xlsx";
-import mongoose from "mongoose";
 import { DataModel } from "./schema.js";
 
 // Process data from Excel sheet
@@ -36,13 +35,31 @@ const sendData = async (req, res) => {
 
     return res.status(200).json({
       message: "Data added successfully",
-      result,
     });
   } catch (error) {
     console.error("Error inserting data into MongoDB", error);
     return res.status(500).json({
       message: "Internal Server Error",
     });
+  }
+};
+
+// Render Certificates on HTML page
+const renderCert = async (req, res) => {
+  try {
+    const fetch_result = await DataModel.find({});
+
+    if (fetch_result.length === 0) {
+      return res.status(400).json({
+        message: "No data found",
+      });
+    }
+
+    res.render("pages/index", {
+      fetch_data: fetch_result,
+    });
+  } catch (error) {
+    console.error("Error while rendering certificate:", error);
   }
 };
 
@@ -85,4 +102,4 @@ const deleteData = async (req, res) => {
   }
 };
 
-export { sendData, fetchData, deleteData };
+export { sendData, fetchData, deleteData, renderCert };

@@ -22,6 +22,12 @@
 }
 ```
 
+**Page Showcase**
+
+`http://localhost:3000/certs` (browser URL) can be used to access certificates of contributers
+
+![Cert Page](extras/image.png)
+
 **Add Data**
 
 ```text
@@ -30,54 +36,7 @@
 
 ```json
 {
-  "message": "Data added successfully",
-  "result": [
-    {
-      "name": "user 1",
-      "mobile_no": "123456789",
-      "email": "user1@mail.com",
-      "amount": 4000,
-      "no_of_trees": 40,
-      "_id": "656a415585402c8314b00ad3",
-      "__v": 0
-    },
-    {
-      "name": "user 2",
-      "mobile_no": "1234567890",
-      "email": "user2@mail.com",
-      "amount": 2000,
-      "no_of_trees": 20,
-      "_id": "656a415585402c8314b00ad4",
-      "__v": 0
-    },
-    {
-      "name": "user 3",
-      "mobile_no": "2345678901",
-      "email": "user3@mail.com",
-      "amount": 2600,
-      "no_of_trees": 26,
-      "_id": "656a415585402c8314b00ad5",
-      "__v": 0
-    },
-    {
-      "name": "user 4",
-      "mobile_no": "3456789012",
-      "email": "user4@mail.com",
-      "amount": 3200,
-      "no_of_trees": 32,
-      "_id": "656a415585402c8314b00ad6",
-      "__v": 0
-    },
-    {
-      "name": "user 5",
-      "mobile_no": "4567890123",
-      "email": "user5@mail.com",
-      "amount": 4800,
-      "no_of_trees": 48,
-      "_id": "656a415585402c8314b00ad7",
-      "__v": 0
-    }
-  ]
+  "message": "Data added successfully"
 }
 ```
 
